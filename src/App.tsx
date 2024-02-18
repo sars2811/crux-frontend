@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { ThemeProvider } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import themeOptions from './theme';
