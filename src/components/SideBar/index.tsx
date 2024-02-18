@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
-import Avatar from '@mui/material/Avatar';
 import AvatarPlaceholder from './../../assets/images/AvatarPlaceholder.png';
 import { ReactComponent as Logo } from './../../assets/images/logo.svg';
 import { ReactComponent as Icon1 } from './../../assets/images/Icon-1.svg';
 import { ReactComponent as Icon2 } from './../../assets/images/Icon-2.svg';
 import { ReactComponent as Icon3 } from './../../assets/images/Icon-3.svg';
+import IconNavLink from './IconNavLink';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
@@ -25,8 +26,11 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'space-evenly',
     height: '30%',
     svg: {
-      scale: '1.2',
+      scale: '1.25',
     },
+  },
+  avatar: {
+    marginBottom: '20px',
   },
 }));
 
@@ -35,12 +39,14 @@ const SideBar: React.FC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.navigationContainer}>
-        <Logo />
-        <Icon1 />
-        <Icon2 />
-        <Icon3 />
+        <Link to='/'>
+          <Logo />
+        </Link>
+        <IconNavLink href='/1' icon={<Icon1 />} />
+        <IconNavLink href='/2' icon={<Icon2 />} />
+        <IconNavLink href='/widgets' icon={<Icon3 />} />
       </div>
-      <div>
+      <div className={classes.avatar}>
         <img src={AvatarPlaceholder} />
       </div>
     </div>
