@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBar from '../../components/SideBar';
+import SideBar from './SideBar';
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 

@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
         element: <WidgetDashboard />,
         children: [
           {
-            path: '/widgets',
+            path: '/widgets/',
             element: (
               <div style={{ width: '100%', height: '100%' }}>Overview</div>
             ),

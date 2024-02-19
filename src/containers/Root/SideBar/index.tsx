@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
-import AvatarPlaceholder from './../../assets/images/AvatarPlaceholder.png';
-import { ReactComponent as Logo } from './../../assets/images/logo.svg';
-import { ReactComponent as Icon1 } from './../../assets/images/Icon-1.svg';
-import { ReactComponent as Icon2 } from './../../assets/images/Icon-2.svg';
-import { ReactComponent as Icon3 } from './../../assets/images/Icon-3.svg';
+import AvatarPlaceholder from './../../../assets/images/AvatarPlaceholder.png';
+import { ReactComponent as Logo } from './../../../assets/images/logo.svg';
+import { ReactComponent as Icon1 } from './../../../assets/images/Icon-1.svg';
+import { ReactComponent as Icon2 } from './../../../assets/images/Icon-2.svg';
+import { ReactComponent as Icon3 } from './../../../assets/images/Icon-3.svg';
 import IconNavLink from './IconNavLink';
 import { Link } from 'react-router-dom';
 
