@@ -7,6 +7,7 @@ import { Close } from '@mui/icons-material';
 interface ModalHeaderProps {
   title: string;
   setTitle: (title: string) => void;
+  onClose: () => void;
 }
 
 const useStyles = makeStyles()((theme) => ({
@@ -56,7 +57,11 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const ModalHeader: React.FC<ModalHeaderProps> = ({ title, setTitle }) => {
+const ModalHeader: React.FC<ModalHeaderProps> = ({
+  title,
+  setTitle,
+  onClose,
+}) => {
   const { classes } = useStyles();
 
   return (
@@ -76,7 +81,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({ title, setTitle }) => {
         </div>
       </div>
       <div className={classes.actionRoot}>
-        <IconButton>
+        <IconButton onClick={onClose}>
           <Close />
         </IconButton>
         <Input

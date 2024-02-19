@@ -3,6 +3,8 @@ import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 import ModalHeader from './ModalHeader';
 import { title } from 'process';
+import ModalBody from './ModalBody';
+import WidgetType from '../../../commons/enums/WidgetType';
 
 interface AddWidgetProps {
   open: boolean;
@@ -14,9 +16,11 @@ interface AddWidgetProps {
 const useStyles = makeStyles()((theme) => ({
   modalContentRoot: {
     height: '80%',
-    width: '80%',
+    width: '70%',
     backgroundColor: theme.palette.background.paper,
-    borderRadius: '10px',
+    borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   root: {
     display: 'flex',
@@ -34,6 +38,9 @@ const AddWidget: React.FC<AddWidgetProps> = ({
   const { classes } = useStyles();
   const [navKey, setNavKey] = React.useState(tabKeys[selectedTab]);
   const [title, setTitle] = React.useState<string>('Scores');
+  const [widgetType, setWidgetType] = React.useState<WidgetType>(
+    WidgetType.Data
+  );
 
   React.useEffect(() => {
     setNavKey(tabKeys[selectedTab]);
@@ -42,7 +49,12 @@ const AddWidget: React.FC<AddWidgetProps> = ({
   return (
     <Modal open={open} onClose={onClose} className={classes.root}>
       <div className={classes.modalContentRoot}>
-        <ModalHeader title={title} setTitle={setTitle} />
+        <ModalHeader title={title} setTitle={setTitle} onClose={onClose} />
+        <ModalBody
+          onClose={onClose}
+          widgetType={widgetType}
+          setWidgetType={setWidgetType}
+        />
       </div>
     </Modal>
   );
