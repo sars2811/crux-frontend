@@ -7,7 +7,14 @@ import {
 import { AppBar, Button, IconButton } from '@mui/material';
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
-import CustomNavButton from './CustomNavButton';
+import CustomNavButton, { CustomNavButtonProps } from './CustomNavButton';
+
+interface NavBarProps {
+  selectedTab: number;
+  setSelectedTab: (tabIndex: number) => void;
+  tabs: CustomNavButtonProps[];
+  setModalOpen: (open: boolean) => void;
+}
 
 const useStyles = makeStyles()((theme) => ({
   root: {
@@ -53,9 +60,14 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<NavBarProps> = ({
+  selectedTab,
+  setSelectedTab,
+  tabs,
+  setModalOpen,
+}) => {
   const { classes } = useStyles();
-  //   return <h1>Yo</h1>;
+
   return (
     <AppBar position='sticky' className={classes.root}>
       <div className={classes.container}>
@@ -63,25 +75,16 @@ const NavBar: React.FC = () => {
           <IconButton>
             <HomeOutlined />
           </IconButton>
-          <CustomNavButton href='/widgets' text='Overview' icon={<Close />} />
-          <CustomNavButton
-            href='/widgets/customers'
-            text='Customers'
-            icon={<Close />}
-          />
-          <CustomNavButton
-            href='/widgets/products'
-            text='Products'
-            icon={<Close />}
-          />
-          <CustomNavButton
-            href='/widgets/add'
-            icon={<AddOutlined />}
-            iconActive
-          />
+          {tabs.map((tab, index) => (
+            <CustomNavButton {...tab} key={index} />
+          ))}
         </div>
         <div className={classes.buttonContainer}>
-          <Button variant='contained' className={classes.customButton}>
+          <Button
+            variant='contained'
+            className={classes.customButton}
+            onClick={() => setModalOpen(true)}
+          >
             <AddOutlined />
             Add Widget
           </Button>

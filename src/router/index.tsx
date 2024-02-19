@@ -13,16 +13,6 @@ const routes = createBrowserRouter([
       {
         path: '/widgets',
         element: <WidgetDashboard />,
-        children: [
-          {
-            path: '/widgets/',
-            element: (
-              <div style={{ width: '100%', height: '100%' }}>Overview</div>
-            ),
-          },
-          { path: '/widgets/customers', element: <div>Customers</div> },
-          { path: '/widgets/products', element: <div>Orders</div> },
-        ],
       },
       { path: '/1', element: <div>1</div> },
       { path: '/2', element: <div>2</div> },

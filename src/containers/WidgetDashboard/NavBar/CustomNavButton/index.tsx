@@ -1,12 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
+import { Button } from '@mui/material';
 
-interface CustomNavButtonProps {
-  href: string;
+export interface CustomNavButtonProps {
   text?: string;
   icon?: React.ReactNode;
   iconActive?: boolean;
+  selectedTab: number;
+  setSelectedTab: (tabIndex: number) => void;
+  tabId: number;
 }
 
 const useStyles = makeStyles()((theme) => ({
@@ -50,23 +52,22 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const CustomNavButton: React.FC<CustomNavButtonProps> = ({
-  href,
   text,
   icon,
   iconActive,
+  selectedTab,
+  setSelectedTab,
+  tabId,
 }) => {
   const { classes } = useStyles();
   return (
-    <NavLink
-      end
-      to={href}
-      className={({ isActive, isPending }) =>
-        [
-          classes.container,
-          isActive ? classes.containerActive : '',
-          iconActive ? classes.iconActive : '',
-        ].join(' ')
-      }
+    <Button
+      className={[
+        classes.container,
+        selectedTab === tabId ? classes.containerActive : '',
+        iconActive ? classes.iconActive : '',
+      ].join(' ')}
+      onClick={() => setSelectedTab(tabId)}
     >
       <div
         className={classes.textContainer}
@@ -75,7 +76,7 @@ const CustomNavButton: React.FC<CustomNavButtonProps> = ({
         {text}
       </div>
       {icon}
-    </NavLink>
+    </Button>
   );
 };
 
