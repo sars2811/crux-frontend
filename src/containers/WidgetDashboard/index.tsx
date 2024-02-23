@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 import NavBar from './NavBar';
-import { Outlet } from 'react-router-dom';
 import { AddOutlined, Close } from '@mui/icons-material';
 import { CustomNavButtonProps } from './NavBar/CustomNavButton';
 import AddWidget from './AddWidget';
 
 const tabKeys = [['Customers', 'Products'], ['Customers'], ['Products']];
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     width: '100%',

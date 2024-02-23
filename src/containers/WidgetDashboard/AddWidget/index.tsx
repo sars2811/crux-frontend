@@ -2,7 +2,6 @@ import { Modal } from '@mui/material';
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 import ModalHeader from './ModalHeader';
-import { title } from 'process';
 import ModalBody from './ModalBody';
 import WidgetType from '../../../commons/enums/WidgetType';
 
