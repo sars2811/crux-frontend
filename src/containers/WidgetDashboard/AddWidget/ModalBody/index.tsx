@@ -12,6 +12,8 @@ interface ModalBodyProps {
   onClose: () => void;
   widgetType: WidgetType;
   setWidgetType: (widgetType: WidgetType) => void;
+  widgetColor: WidgetColor;
+  setWidgetColor: (widgetColor: WidgetColor) => void;
 }
 
 const data = [
@@ -117,6 +119,8 @@ const useStyles = makeStyles()((theme) => ({
     flexGrow: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
+    justifyItems: 'top',
   },
   actionContainer: {
     height: '100%',
@@ -194,25 +198,83 @@ const useStyles = makeStyles()((theme) => ({
     backgroundColor: theme.palette.background.paper,
     borderRadius: '4px',
   },
+  widgetSizeText: {
+    alignSelf: 'flex-start',
+    fontSize: '18px',
+    color: theme.palette.text.secondary,
+    fontWeight: 'bold',
+    top: '0',
+    margin: '30px 0 0 30px',
+  },
+  widget: {
+    margin: 'auto',
+    display: 'flex',
+    position: 'relative',
+    // top: '-10px',
+  },
+  colorButtonGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '8px',
+    marginBottom: '10px',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  colorButton: {
+    margin: '4px',
+    borderRadius: '50%',
+    width: '10px',
+    height: '10px',
+    cursor: 'pointer',
+    padding: '6px',
+  },
+  colorButtonActive: {
+    border: '2px solid #D3D2F5',
+    borderRadius: '50%',
+  },
 }));
 
 const ModalBody: React.FC<ModalBodyProps> = ({
   onClose,
   widgetType,
   setWidgetType,
+  widgetColor,
+  setWidgetColor,
 }) => {
   const { classes } = useStyles();
 
   return (
     <div className={classes.root}>
       <div className={classes.widgetContainer}>
-        <Widget
-          widgetType={widgetType}
-          widgetData={data}
-          moreButtonDisbale={true}
-          widgetCategory={'Product'}
-          widgetColor={WidgetColor.White}
-        />
+        <p className={classes.widgetSizeText}>1 x 1</p>
+        <div className={classes.widget}>
+          <Widget
+            widgetType={widgetType}
+            widgetData={data}
+            moreButtonDisbale={true}
+            widgetCategory={'Product'}
+            widgetColor={WidgetColor.White}
+          />
+        </div>
+        <div className={classes.colorButtonGroup}>
+          {Object.keys(WidgetColor).map((color) => (
+            <div
+              key={color}
+              className={widgetColor === color ? classes.colorButtonActive : ''}
+            >
+              <div
+                className={classes.colorButton}
+                style={{
+                  backgroundColor:
+                    WidgetColor[color as keyof typeof WidgetColor],
+                }}
+                onClick={() => {
+                  setWidgetColor(color as WidgetColor);
+                }}
+              ></div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className={classes.actionContainer}>
         <div className={classes.buttonGroup}>

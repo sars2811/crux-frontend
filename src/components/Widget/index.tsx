@@ -52,7 +52,7 @@ export interface WidgetTabData {
   summary: SummaryData;
 }
 
-export const enum WidgetColor {
+export enum WidgetColor {
   White = '#FFFFFF',
   Black = '#000000',
   Crux = '#5E5ADB',
