@@ -25,7 +25,7 @@ const useStyles = makeStyles()((theme) => ({
     border: '1px solid #E0DFF8',
     padding: '8px 12px',
     borderRadius: '10px',
-    textDecoration: 'none',
+    textTransform: 'none',
   },
   containerActive: {
     background: theme.palette.background.default,

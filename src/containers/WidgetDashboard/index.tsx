@@ -4,6 +4,14 @@ import NavBar from './NavBar';
 import { AddOutlined, Close } from '@mui/icons-material';
 import { CustomNavButtonProps } from './NavBar/CustomNavButton';
 import AddWidget from './AddWidget';
+import WidgetDisplay from './WidgetDisplay';
+import {
+  WidgetColor,
+  WidgetData,
+  WidgetTabData,
+} from '../../components/Widget';
+import WidgetType from '../../commons/enums/WidgetType';
+import { getWidgetData, getWidgetTabData } from '../../services/WidgetData';
 
 const tabKeys = [['customers', 'products'], ['customers'], ['products']];
 
@@ -65,8 +73,10 @@ const WidgetDashboard: React.FC = () => {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         selectedTab={selectedTab}
-        tabKeys={tabKeys}
+        data={getWidgetTabData(tabKeys[selectedTab][0])}
+        tabKey={tabKeys[selectedTab][0]}
       />
+      <WidgetDisplay data={getWidgetData(tabKeys[selectedTab])} />
     </div>
   );
 };

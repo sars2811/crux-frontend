@@ -4,13 +4,14 @@ import { makeStyles } from 'tss-react/mui';
 import ModalHeader from './ModalHeader';
 import ModalBody from './ModalBody';
 import WidgetType from '../../../commons/enums/WidgetType';
-import { WidgetColor } from '../../../components/Widget';
+import { WidgetColor, WidgetTabData } from '../../../components/Widget';
 
 interface AddWidgetProps {
   open: boolean;
   onClose: () => void;
   selectedTab: number;
-  tabKeys: string[][];
+  tabKey: string;
+  data: WidgetTabData[];
 }
 
 const useStyles = makeStyles()((theme) => ({
@@ -30,13 +31,12 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const AddWidget: React.FC<AddWidgetProps> = ({
-  selectedTab,
-  tabKeys,
   open,
   onClose,
+  tabKey,
+  data,
 }) => {
   const { classes } = useStyles();
-  const [navKey, setNavKey] = React.useState(tabKeys[selectedTab]);
   const [title, setTitle] = React.useState<string>('Scores');
   const [widgetType, setWidgetType] = React.useState<WidgetType>(
     WidgetType.Data
@@ -45,10 +45,6 @@ const AddWidget: React.FC<AddWidgetProps> = ({
   const [widgetColor, setWidgetColor] = React.useState<WidgetColor>(
     WidgetColor.White
   );
-
-  React.useEffect(() => {
-    setNavKey(tabKeys[selectedTab]);
-  }, [selectedTab, tabKeys]);
 
   return (
     <Modal open={open} onClose={onClose} className={classes.root}>
@@ -61,6 +57,7 @@ const AddWidget: React.FC<AddWidgetProps> = ({
           widgetColor={widgetColor}
           setWidgetColor={setWidgetColor}
           title={title}
+          data={data}
         />
       </div>
     </Modal>

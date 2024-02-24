@@ -57,6 +57,7 @@ const useStyles = makeStyles()((theme) => ({
     },
     gap: '5px',
     borderRadius: '10px',
+    textTransform: 'none',
   },
 }));
 

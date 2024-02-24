@@ -6,7 +6,10 @@ import { Restore } from '@mui/icons-material';
 import { ReactComponent as BarGraph } from './../../../../assets/images/bar-chart.svg';
 import { ReactComponent as LineGraph } from './../../../../assets/images/line-graph.svg';
 import { ReactComponent as PieGraph } from './../../../../assets/images/pie-chart.svg';
-import Widget, { WidgetColor } from '../../../../components/Widget';
+import Widget, {
+  WidgetColor,
+  WidgetTabData,
+} from '../../../../components/Widget';
 
 interface ModalBodyProps {
   onClose: () => void;
@@ -15,92 +18,8 @@ interface ModalBodyProps {
   widgetColor: WidgetColor;
   setWidgetColor: (widgetColor: WidgetColor) => void;
   title: string;
+  data: WidgetTabData[];
 }
-
-const data = [
-  {
-    name: '7d',
-    data: [
-      {
-        name: 'Reusable',
-        data: [
-          { name: 'Q1-2023', value: 10 },
-          { name: 'Q2-2023', value: 4 },
-        ],
-      },
-      {
-        name: 'Natural',
-        data: [
-          { name: 'Q1-2023', value: 2 },
-          { name: 'Q2-2023', value: 11 },
-        ],
-      },
-      {
-        name: 'Compost',
-        data: [
-          { name: 'Q1-2023', value: 7 },
-          { name: 'Q2-2023', value: 5 },
-        ],
-      },
-      {
-        name: 'Reusable..',
-        data: [
-          { name: 'Q1-2023', value: 3 },
-          { name: 'Q2-2023', value: 4 },
-        ],
-      },
-    ],
-    summary: {
-      name: 'Totals',
-      data: [
-        { name: 'Q1-2023', value: 22 },
-        { name: 'Q2-2023', value: 24 },
-      ],
-      text: 'lorum ipsum',
-    },
-  },
-  {
-    name: '14d',
-    data: [
-      {
-        name: 'Reusable',
-        data: [
-          { name: 'Q1-2023', value: 10 },
-          { name: 'Q2-2023', value: 4 },
-        ],
-      },
-      {
-        name: 'Natural',
-        data: [
-          { name: 'Q1-2023', value: 2 },
-          { name: 'Q2-2023', value: 11 },
-        ],
-      },
-      {
-        name: 'Compost',
-        data: [
-          { name: 'Q1-2023', value: 7 },
-          { name: 'Q2-2023', value: 5 },
-        ],
-      },
-      {
-        name: 'Reusable..',
-        data: [
-          { name: 'Q1-2023', value: 3 },
-          { name: 'Q2-2023', value: 4 },
-        ],
-      },
-    ],
-    summary: {
-      name: 'Totals',
-      data: [
-        { name: 'Q1-2023', value: 22 },
-        { name: 'Q2-2023', value: 24 },
-      ],
-      text: 'lorum ipsum',
-    },
-  },
-];
 
 const useStyles = makeStyles()((theme) => ({
   root: {
@@ -251,6 +170,7 @@ const ModalBody: React.FC<ModalBodyProps> = ({
   widgetColor,
   setWidgetColor,
   title,
+  data,
 }) => {
   const { classes } = useStyles();
 

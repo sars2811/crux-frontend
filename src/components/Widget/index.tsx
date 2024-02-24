@@ -48,7 +48,6 @@ interface SummaryData {
 
 export interface WidgetTabData {
   data: ColumnData[];
-  index?: number; // Index of the Widget in Saved Data, will not be present in new Widget
   name: string; // Name of the Tab
   summary: SummaryData;
 }
@@ -59,7 +58,7 @@ export enum WidgetColor {
   Crux = '#5E5ADB',
 }
 
-interface WidgetData {
+export interface WidgetData {
   widgetTitle?: string;
   widgetCategory: string;
   widgetType: WidgetType;
@@ -110,7 +109,7 @@ const useStyles = makeStyles<{ widgetColor: WidgetColor }>()(
     root: {
       display: 'flex',
       flexDirection: 'column',
-      height: '400px',
+      height: '300px',
       aspectRatio: '1/1',
       margin: 0,
       borderRadius: '20px',
@@ -187,6 +186,9 @@ const useStyles = makeStyles<{ widgetColor: WidgetColor }>()(
     moreButton: {
       color: widgetTextTheme[widgetColor].primary,
     },
+    tableCell: {
+      color: widgetTextTheme[widgetColor].primary,
+    },
   })
 );
 
@@ -254,8 +256,8 @@ const Widget: React.FC<WidgetData> = ({
         {widgetType === WidgetType.BarGraph && (
           <BarChart
             data={structuredData}
-            height={320}
-            width={360}
+            height={220}
+            width={260}
             barSize={10}
             barGap={2}
             className={classes.chartRoot}
@@ -284,8 +286,8 @@ const Widget: React.FC<WidgetData> = ({
         {widgetType === WidgetType.LineGraph && (
           <LineChart
             data={structuredData}
-            height={320}
-            width={360}
+            height={220}
+            width={260}
             className={classes.chartRoot}
           >
             <XAxis dataKey='name' hide />
@@ -311,7 +313,7 @@ const Widget: React.FC<WidgetData> = ({
           </LineChart>
         )}
         {widgetType === WidgetType.PieGraph && (
-          <PieChart height={320} width={360} className={classes.chartRoot}>
+          <PieChart height={220} width={260} className={classes.chartRoot}>
             <Tooltip />
             <Pie
               data={structuredData}
@@ -331,8 +333,8 @@ const Widget: React.FC<WidgetData> = ({
               ))}
             </Pie>
             <text
-              x={180}
-              y={150}
+              x={130}
+              y={100}
               textAnchor='middle'
               dominantBaseline='middle'
               style={{
@@ -342,8 +344,8 @@ const Widget: React.FC<WidgetData> = ({
               {widgetData[tabIndex].summary.data[0].value}
             </text>
             <text
-              x={180}
-              y={170}
+              x={130}
+              y={120}
               textAnchor='middle'
               dominantBaseline='middle'
               style={{
@@ -379,9 +381,15 @@ const Widget: React.FC<WidgetData> = ({
                 {widgetData[tabIndex].data.map((column, index) => {
                   return (
                     <TableRow key={index}>
-                      <TableCell>{column.name}</TableCell>
+                      <TableCell className={classes.tableCell}>
+                        {column.name}
+                      </TableCell>
                       {column.data.map((block, index) => {
-                        return <TableCell key={index}>{block.value}</TableCell>;
+                        return (
+                          <TableCell key={index} className={classes.tableCell}>
+                            {block.value}
+                          </TableCell>
+                        );
                       })}
                     </TableRow>
                   );
