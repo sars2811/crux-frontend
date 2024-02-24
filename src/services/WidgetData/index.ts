@@ -40,7 +40,7 @@ const widgetTabData: WidgetTabData[] = [
           { name: 'Q1-2023', value: 22 },
           { name: 'Q2-2023', value: 24 },
         ],
-        text: 'lorum ipsum',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. Enim ut tellus elementum sagittis vitae et leo duis. Diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus. Dictumst quisque sagittis purus sit amet volutpat. Cursus sit amet dictum sit amet. Elit ut aliquam purus sit amet luctus venenatis lectus.',
       },
     },
     {
@@ -81,7 +81,7 @@ const widgetTabData: WidgetTabData[] = [
           { name: 'Q1-2023', value: 22 },
           { name: 'Q2-2023', value: 24 },
         ],
-        text: 'lorum ipsum',
+        text: 'Euismod lacinia at quis risus sed vulputate. Nunc non blandit massa enim nec. Fringilla phasellus faucibus scelerisque eleifend donec. Vel pharetra vel turpis nunc eget lorem dolor sed viverra. Consequat mauris nunc congue nisi vitae. Sapien et ligula ullamcorper malesuada.',
       },
     },
   ];
@@ -101,24 +101,24 @@ const widgetCustomerData: WidgetData[] = [
       widgetData: widgetTabData,
       widgetColor: WidgetColor.Crux,
     },
-    {
+      {
         widgetTitle: 'Some Other Score',
         widgetCategory: 'Customers',
-        widgetType: WidgetType.Data,
+        widgetType: WidgetType.PieGraph,
         widgetData: widgetTabData,
-        widgetColor: WidgetColor.Crux,
+        widgetColor: WidgetColor.White,
       },
       {
         widgetTitle: 'Some Other Score',
         widgetCategory: 'Customers',
-        widgetType: WidgetType.Data,
+        widgetType: WidgetType.LineGraph,
         widgetData: widgetTabData,
-        widgetColor: WidgetColor.Crux,
+        widgetColor: WidgetColor.Black,
       },
       {
         widgetTitle: 'Some Other Score',
         widgetCategory: 'Customers',
-        widgetType: WidgetType.Data,
+        widgetType: WidgetType.Summary,
         widgetData: widgetTabData,
         widgetColor: WidgetColor.Crux,
       },

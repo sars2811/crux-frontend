@@ -130,6 +130,9 @@ const useStyles = makeStyles<{ widgetColor: WidgetColor }>()(
     summaryText: {
       margin: '15px',
       color: widgetTextTheme[widgetColor].primary,
+      height: '210px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     chartRoot: {
       margin: '10px',
