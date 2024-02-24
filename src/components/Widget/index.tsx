@@ -293,7 +293,7 @@ const Widget: React.FC<WidgetData> = ({
             width={260}
             className={classes.chartRoot}
           >
-            <XAxis dataKey='name' hide />
+            <XAxis dataKey='name' hide type={'category'} />
             <YAxis tick={{ fill: widgetTextTheme[widgetColor].primary }} />
             <Tooltip />
             <CartesianGrid

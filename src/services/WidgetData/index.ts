@@ -1,7 +1,7 @@
 import WidgetType from "../../commons/enums/WidgetType";
 import { WidgetColor, WidgetData, WidgetTabData } from "../../components/Widget";
 
-const widgetTabData: WidgetTabData[] = [
+const widgetTabProductData: WidgetTabData[] = [
     {
       name: '7d',
       data: [
@@ -86,52 +86,119 @@ const widgetTabData: WidgetTabData[] = [
     },
   ];
   
+const widgetTabCustomerData: WidgetTabData[] = [
+  {
+    name: 'today',
+    data: [
+      {
+        name: 'Christmas25',
+        data: [
+          { name: 'Google' , value: 12000 },
+          { name: 'Instagram' , value: 5000 },
+          { name: 'Facebook' , value: 10000 },
+          { name: 'TikTok' , value: 7000 },
+        ],
+      },
+      {
+        name: 'BirthdaySpecial25',
+        data: [
+          { name: 'Google' , value: 21000 },
+          { name: 'Instagram' , value: 27000 },
+          { name: 'Facebook' , value: 4000 },
+          { name: 'TikTok' , value: 2000 },
+        ],
+      },
+      {
+        name: 'NewUser25',
+        data: [
+          { name: 'Google' , value: 27000 },
+          { name: 'Instagram' , value: 12500 },
+          { name: 'Facebook' , value: 13000 },
+          { name: 'TikTok' , value: 25000 },
+        ],
+      }
+    ],
+    summary: {
+      text: "Based on the provided data, the most effective hour of the day to send an email across all stores for all time, with the highest engagement after opening, is at 15:00(3 PM), with a total of 5041 emails opened. The next best hours are 16:00 (4 PM) and 17:00 (5 PM) with 5007 and 4785 emails opened respectively. There is a noticeable drop in ",
+      name: "Totals",
+      data: [
+        { name: 'Google' , value: 50000 },
+        { name: 'Instagram' , value: 50000 },
+        { name: 'Facebook' , value: 50000 },
+        { name: 'TikTok' , value: 50000 },
+      ],
+    },
+  }
+]; 
+
+
 const widgetCustomerData: WidgetData[] = [
+  {
+    widgetTitle: 'Some Score',
+    widgetCategory: 'Products',
+    widgetType: WidgetType.LineGraph,
+    widgetData: widgetTabCustomerData,
+    widgetColor: WidgetColor.White,
+  },
     {
-      widgetTitle: 'Some Score',
-      widgetCategory: 'Customers',
+      widgetTitle: 'Some Other Score',
+      widgetCategory: 'Products',
+      widgetType: WidgetType.PieGraph,
+      widgetData: widgetTabCustomerData,
+      widgetColor: WidgetColor.White,
+    },
+    {
+      widgetTitle: 'Some Other Score',
+      widgetCategory: 'Products',
       widgetType: WidgetType.LineGraph,
-      widgetData: widgetTabData,
+      widgetData: widgetTabCustomerData,
+      widgetColor: WidgetColor.Black,
+    },
+    {
+      widgetTitle: 'Some Other Score',
+      widgetCategory: 'Products',
+      widgetType: WidgetType.Summary,
+      widgetData: widgetTabCustomerData,
+      widgetColor: WidgetColor.Crux,
+    },
+  ];
+
+const widgetProductData: WidgetData[] = [
+  {
+    widgetTitle: 'Some Score',
+    widgetCategory: 'Customers',
+    widgetType: WidgetType.LineGraph,
+    widgetData: widgetTabProductData,
+    widgetColor: WidgetColor.White,
+  },
+  {
+    widgetTitle: 'Some Other Score',
+    widgetCategory: 'Customers',
+    widgetType: WidgetType.Data,
+    widgetData: widgetTabProductData,
+    widgetColor: WidgetColor.Crux,
+  },
+    {
+      widgetTitle: 'Some Other Score',
+      widgetCategory: 'Customers',
+      widgetType: WidgetType.PieGraph,
+      widgetData: widgetTabProductData,
       widgetColor: WidgetColor.White,
     },
     {
       widgetTitle: 'Some Other Score',
       widgetCategory: 'Customers',
-      widgetType: WidgetType.Data,
-      widgetData: widgetTabData,
+      widgetType: WidgetType.LineGraph,
+      widgetData: widgetTabProductData,
+      widgetColor: WidgetColor.Black,
+    },
+    {
+      widgetTitle: 'Some Other Score',
+      widgetCategory: 'Customers',
+      widgetType: WidgetType.Summary,
+      widgetData: widgetTabProductData,
       widgetColor: WidgetColor.Crux,
     },
-      {
-        widgetTitle: 'Some Other Score',
-        widgetCategory: 'Customers',
-        widgetType: WidgetType.PieGraph,
-        widgetData: widgetTabData,
-        widgetColor: WidgetColor.White,
-      },
-      {
-        widgetTitle: 'Some Other Score',
-        widgetCategory: 'Customers',
-        widgetType: WidgetType.LineGraph,
-        widgetData: widgetTabData,
-        widgetColor: WidgetColor.Black,
-      },
-      {
-        widgetTitle: 'Some Other Score',
-        widgetCategory: 'Customers',
-        widgetType: WidgetType.Summary,
-        widgetData: widgetTabData,
-        widgetColor: WidgetColor.Crux,
-      },
-  ];
-
-const widgetProductData: WidgetData[] = [
-    {
-        widgetTitle: 'Some Score',
-        widgetCategory: 'Customers',
-        widgetType: WidgetType.BarGraph,
-        widgetData: widgetTabData,
-        widgetColor: WidgetColor.Black,
-      },
 ];
 
 const data: { [key: string]: WidgetData[] } = {
@@ -148,5 +215,5 @@ export const getWidgetData = (tabs: string[]) => {
 }; 
 
 export const getWidgetTabData = (tab: string) => {
-    return widgetTabData;
+    return widgetTabProductData;
 };
