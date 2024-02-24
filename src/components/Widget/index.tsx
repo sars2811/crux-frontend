@@ -12,6 +12,7 @@ import {
   TableHead,
   TableRow,
   Tabs,
+  Theme,
 } from '@mui/material';
 import { MoreHoriz } from '@mui/icons-material';
 import {
@@ -54,7 +55,7 @@ export interface WidgetTabData {
 
 export enum WidgetColor {
   White = '#FFFFFF',
-  Black = '#000000',
+  Black = 'rgba(40, 40, 40, 1)',
   Crux = '#5E5ADB',
 }
 
@@ -76,74 +77,118 @@ const colors = [
   '#5E5ADB',
 ];
 
-const useStyles = makeStyles()((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '400px',
-    aspectRatio: '1/1',
-    backgroundColor: theme.palette.background.paper,
-    margin: 0,
-    borderRadius: '20px',
+interface WidgetTextThemeColor {
+  primary: string;
+  secondary: string;
+  information: string;
+  tableHeader: string;
+}
+
+const widgetTextTheme: { [key in WidgetColor]: WidgetTextThemeColor } = {
+  [WidgetColor.White]: {
+    primary: '#8d8d8d',
+    secondary: '#5e5adb',
+    information: 'rgba(57, 57, 57, 0.9)',
+    tableHeader: '#ABA8FF',
   },
-  header: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignContent: 'center',
-    width: '100%',
-    borderBottom: '1px solid #CBD5E1',
-    height: 'fit-content',
-    justifyContent: 'space-between',
-    paddingTop: '10px',
+  [WidgetColor.Black]: {
+    primary: 'rgba(241, 241, 242, 0.6)',
+    secondary: '#ffffff',
+    information: '#ffffff',
+    tableHeader: 'rgba(241, 241, 242, 0.6)',
   },
-  tab: {
-    color: theme.palette.text.primary,
+  [WidgetColor.Crux]: {
+    secondary: '#ffffff',
+    primary: 'rgba(255, 255, 255, 0.65)',
+    information: '#ffffff',
+    tableHeader: 'rgba(241, 241, 242, 0.6)',
   },
-  summaryText: {
-    margin: '15px',
-    color: 'rgba(0, 0, 0, 0.65)',
-  },
-  chartRoot: {
-    margin: '10px',
-  },
-  tableContainer: {
-    'width': 'auto',
-    'margin': '10px',
-    'height': '100%',
-    ' td': {
-      borderBottom: 'none !important',
+};
+
+const useStyles = makeStyles<{ widgetColor: WidgetColor }>()(
+  (theme, { widgetColor }) => ({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '400px',
+      aspectRatio: '1/1',
+      margin: 0,
+      borderRadius: '20px',
     },
-    ' th': {
-      borderBottom: 'none !important',
+    header: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignContent: 'center',
+      width: '100%',
+      borderBottom: '3px solid rgba(225, 225, 225, 0.4)',
+      height: 'fit-content',
+      justifyContent: 'space-between',
+      paddingTop: '10px',
     },
-  },
-  widgetCategoryCell: {
-    color: theme.palette.text.secondary,
-  },
-  tableHeaderCell: {
-    color: '#ABA8FF',
-  },
-  tableRoot: {
-    'borderCollapse': 'collapse',
-    ' td': {
-      'borderRight': '3px solid #F6F6F6',
-      'textAlign': 'center',
-      ':last-child': {
-        borderRight: 'none',
+    tab: {
+      color: widgetTextTheme[widgetColor].primary,
+    },
+    summaryText: {
+      margin: '15px',
+      color: widgetTextTheme[widgetColor].primary,
+    },
+    chartRoot: {
+      margin: '10px',
+    },
+    tableContainer: {
+      'width': 'auto',
+      'margin': '10px',
+      'height': '100%',
+      ' td': {
+        borderBottom: 'none !important',
+      },
+      ' th': {
+        borderBottom: 'none !important',
       },
     },
-    ' th': {
-      'borderRight': '3px solid #F6F6F6',
-      'textAlign': 'center',
-      ':last-child': {
-        borderRight: 'none',
+    widgetCategoryCell: {
+      color: widgetTextTheme[widgetColor].secondary,
+    },
+    tableHeaderCell: {
+      color: widgetTextTheme[widgetColor].tableHeader,
+    },
+    tableRoot: {
+      'borderCollapse': 'collapse',
+      ' td': {
+        'borderRight': '3px solid #F6F6F6',
+        'textAlign': 'center',
+        ':last-child': {
+          borderRight: 'none',
+        },
+      },
+      ' th': {
+        'borderRight': '3px solid #F6F6F6',
+        'textAlign': 'center',
+        ':last-child': {
+          borderRight: 'none',
+        },
+      },
+      'tableLayout': 'auto',
+      'width': '100%',
+      'height': '100%',
+    },
+    tableFooterCell: {
+      color: widgetTextTheme[widgetColor].information,
+      fontWeight: 'bold',
+    },
+    tabsContainer: {
+      ' .Mui-selected': {
+        color: `${widgetTextTheme[widgetColor].secondary} !important`,
+      },
+      ' .MuiTabs-indicator': {
+        backgroundColor: widgetTextTheme[widgetColor].secondary,
       },
     },
-    'tableLayout': 'auto',
-    'width': '100%',
-    'height': '100%',
-  },
-}));
+    moreButton: {
+      color: widgetTextTheme[widgetColor].primary,
+    },
+  })
+);
 
 const Widget: React.FC<WidgetData> = ({
   widgetData,
@@ -151,8 +196,9 @@ const Widget: React.FC<WidgetData> = ({
   moreButtonDisbale,
   widgetTitle,
   widgetCategory,
+  widgetColor,
 }) => {
-  const { classes } = useStyles();
+  const { classes } = useStyles({ widgetColor: widgetColor });
   const tabs = widgetData.map((tabData, index) => {
     return [tabData.name, index];
   });
@@ -177,19 +223,25 @@ const Widget: React.FC<WidgetData> = ({
   });
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      style={{
+        backgroundColor: widgetColor,
+      }}
+    >
       <div className={classes.header}>
         <Tabs
           value={tabIndex}
           onChange={handleTabChange}
           textColor='secondary'
           indicatorColor='secondary'
+          className={classes.tabsContainer}
         >
           {tabs.map((tab) => {
             return <Tab label={tab[0]} key={tab[1]} className={classes.tab} />;
           })}
         </Tabs>
-        <IconButton disabled={moreButtonDisbale}>
+        <IconButton disabled={moreButtonDisbale} className={classes.moreButton}>
           <MoreHoriz />
         </IconButton>
       </div>
@@ -201,14 +253,7 @@ const Widget: React.FC<WidgetData> = ({
         )}
         {widgetType === WidgetType.BarGraph && (
           <BarChart
-            data={widgetData[tabIndex].data.map((column) => {
-              const data: { [key: string]: any } = {}; // Add index signature to allow indexing with a string
-              column.data.forEach((block) => {
-                data[block.name] = block.value;
-              });
-              data['name'] = column.name;
-              return data;
-            })}
+            data={structuredData}
             height={320}
             width={360}
             barSize={10}
@@ -216,7 +261,11 @@ const Widget: React.FC<WidgetData> = ({
             className={classes.chartRoot}
           >
             <XAxis dataKey='name' hide padding={{}} />
-            <YAxis axisLine={false} tickLine={false} />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: widgetTextTheme[widgetColor].primary }}
+            />
             <Tooltip />
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
             {dataCategories.map((label, index) => {
@@ -234,24 +283,17 @@ const Widget: React.FC<WidgetData> = ({
         )}
         {widgetType === WidgetType.LineGraph && (
           <LineChart
-            data={widgetData[tabIndex].data.map((column) => {
-              const data: { [key: string]: any } = {}; // Add index signature to allow indexing with a string
-              column.data.forEach((block) => {
-                data[block.name] = block.value;
-              });
-              data['name'] = column.name;
-              return data;
-            })}
+            data={structuredData}
             height={320}
             width={360}
             className={classes.chartRoot}
           >
-            <XAxis dataKey='name' hide interval={'preserveStartEnd'} />
-            <YAxis />
+            <XAxis dataKey='name' hide />
+            <YAxis tick={{ fill: widgetTextTheme[widgetColor].primary }} />
             <Tooltip />
             <CartesianGrid
               horizontal={false}
-              stroke='  rgba(70, 70, 70, 0.1)'
+              stroke={widgetTextTheme[widgetColor].primary}
             />
             {dataCategories.map((label, index) => {
               return (
@@ -288,7 +330,15 @@ const Widget: React.FC<WidgetData> = ({
                 />
               ))}
             </Pie>
-            <text x={180} y={150} textAnchor='middle' dominantBaseline='middle'>
+            <text
+              x={180}
+              y={150}
+              textAnchor='middle'
+              dominantBaseline='middle'
+              style={{
+                fill: widgetTextTheme[widgetColor].secondary,
+              }}
+            >
               {widgetData[tabIndex].summary.data[0].value}
             </text>
             <text
@@ -296,7 +346,10 @@ const Widget: React.FC<WidgetData> = ({
               y={170}
               textAnchor='middle'
               dominantBaseline='middle'
-              style={{ fill: '#BBBBBB', fontSize: '18px' }}
+              style={{
+                fill: widgetTextTheme[widgetColor].primary,
+                fontSize: '18px',
+              }}
             >
               {widgetData[tabIndex].summary.name}
             </text>
@@ -336,9 +389,18 @@ const Widget: React.FC<WidgetData> = ({
               </TableBody>
               <TableFooter>
                 <TableRow>
-                  <TableCell>{widgetData[tabIndex].summary.name}</TableCell>
+                  <TableCell className={classes.tableFooterCell}>
+                    {widgetData[tabIndex].summary.name}
+                  </TableCell>
                   {widgetData[tabIndex].summary.data.map((block, index) => {
-                    return <TableCell key={index}>{block.value}</TableCell>;
+                    return (
+                      <TableCell
+                        key={index}
+                        className={classes.tableFooterCell}
+                      >
+                        {block.value}
+                      </TableCell>
+                    );
                   })}
                 </TableRow>
               </TableFooter>

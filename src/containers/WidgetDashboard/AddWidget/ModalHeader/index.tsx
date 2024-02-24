@@ -3,6 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 import { ReactComponent as ModalIcon } from './../../../../assets/images/layout-dashboard.svg';
 import { IconButton, Input } from '@mui/material';
 import { Close } from '@mui/icons-material';
+import { WidgetColor } from '../../../../components/Widget';
 
 interface ModalHeaderProps {
   title: string;
@@ -55,6 +56,9 @@ const useStyles = makeStyles()((theme) => ({
       scale: '0.9',
     },
   },
+  closeIcon: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 const ModalHeader: React.FC<ModalHeaderProps> = ({
@@ -82,7 +86,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
       </div>
       <div className={classes.actionRoot}>
         <IconButton onClick={onClose}>
-          <Close />
+          <Close className={classes.closeIcon} />
         </IconButton>
         <Input
           value={title}

@@ -14,6 +14,7 @@ interface ModalBodyProps {
   setWidgetType: (widgetType: WidgetType) => void;
   widgetColor: WidgetColor;
   setWidgetColor: (widgetColor: WidgetColor) => void;
+  title: string;
 }
 
 const data = [
@@ -210,6 +211,7 @@ const useStyles = makeStyles()((theme) => ({
     margin: 'auto',
     display: 'flex',
     position: 'relative',
+    flexDirection: 'column',
     // top: '-10px',
   },
   colorButtonGroup: {
@@ -232,6 +234,14 @@ const useStyles = makeStyles()((theme) => ({
     border: '2px solid #D3D2F5',
     borderRadius: '50%',
   },
+  titleText: {
+    margin: '0 0 5px 0',
+    textAlign: 'center',
+    color: theme.palette.text.primary,
+    textTransform: 'uppercase',
+    fontSize: '14px',
+    fontWeight: 'bold',
+  },
 }));
 
 const ModalBody: React.FC<ModalBodyProps> = ({
@@ -240,6 +250,7 @@ const ModalBody: React.FC<ModalBodyProps> = ({
   setWidgetType,
   widgetColor,
   setWidgetColor,
+  title,
 }) => {
   const { classes } = useStyles();
 
@@ -248,16 +259,17 @@ const ModalBody: React.FC<ModalBodyProps> = ({
       <div className={classes.widgetContainer}>
         <p className={classes.widgetSizeText}>1 x 1</p>
         <div className={classes.widget}>
+          <p className={classes.titleText}>{title}</p>
           <Widget
             widgetType={widgetType}
             widgetData={data}
             moreButtonDisbale={true}
             widgetCategory={'Product'}
-            widgetColor={WidgetColor.White}
+            widgetColor={widgetColor}
           />
         </div>
         <div className={classes.colorButtonGroup}>
-          {Object.keys(WidgetColor).map((color) => (
+          {Object.values(WidgetColor).map((color) => (
             <div
               key={color}
               className={widgetColor === color ? classes.colorButtonActive : ''}
@@ -265,8 +277,7 @@ const ModalBody: React.FC<ModalBodyProps> = ({
               <div
                 className={classes.colorButton}
                 style={{
-                  backgroundColor:
-                    WidgetColor[color as keyof typeof WidgetColor],
+                  backgroundColor: color,
                 }}
                 onClick={() => {
                   setWidgetColor(color as WidgetColor);

@@ -60,6 +60,7 @@ const AddWidget: React.FC<AddWidgetProps> = ({
           setWidgetType={setWidgetType}
           widgetColor={widgetColor}
           setWidgetColor={setWidgetColor}
+          title={title}
         />
       </div>
     </Modal>

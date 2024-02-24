@@ -5,7 +5,7 @@ import { AddOutlined, Close } from '@mui/icons-material';
 import { CustomNavButtonProps } from './NavBar/CustomNavButton';
 import AddWidget from './AddWidget';
 
-const tabKeys = [['Customers', 'Products'], ['Customers'], ['Products']];
+const tabKeys = [['customers', 'products'], ['customers'], ['products']];
 
 const useStyles = makeStyles()(() => ({
   root: {
