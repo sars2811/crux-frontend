@@ -19,6 +19,9 @@ const themeOptions = createTheme({
       primary: '#8d8d8d',
     },
   },
+  typography: {
+    fontFamily: 'Geist Sans'
+  },
 })
 
 export default themeOptions;

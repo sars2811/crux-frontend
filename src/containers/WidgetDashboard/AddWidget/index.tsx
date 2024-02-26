@@ -58,6 +58,7 @@ const AddWidget: React.FC<AddWidgetProps> = ({
           setWidgetColor={setWidgetColor}
           title={title}
           data={data}
+          tabKey={tabKey}
         />
       </div>
     </Modal>

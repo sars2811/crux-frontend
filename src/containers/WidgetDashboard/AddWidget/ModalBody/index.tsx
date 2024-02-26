@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 import WidgetType from '../../../../commons/enums/WidgetType';
-import { Button, ButtonGroup, IconButton } from '@mui/material';
+import { Button, ButtonGroup, IconButton, Tab } from '@mui/material';
 import { Restore } from '@mui/icons-material';
 import { ReactComponent as BarGraph } from './../../../../assets/images/bar-chart.svg';
 import { ReactComponent as LineGraph } from './../../../../assets/images/line-graph.svg';
@@ -10,6 +10,7 @@ import Widget, {
   WidgetColor,
   WidgetTabData,
 } from '../../../../components/Widget';
+import { setWidgetData } from '../../../../services/WidgetData';
 
 interface ModalBodyProps {
   onClose: () => void;
@@ -19,6 +20,7 @@ interface ModalBodyProps {
   setWidgetColor: (widgetColor: WidgetColor) => void;
   title: string;
   data: WidgetTabData[];
+  tabKey: string;
 }
 
 const useStyles = makeStyles()((theme) => ({
@@ -171,6 +173,7 @@ const ModalBody: React.FC<ModalBodyProps> = ({
   setWidgetColor,
   title,
   data,
+  tabKey,
 }) => {
   const { classes } = useStyles();
 
@@ -320,6 +323,16 @@ const ModalBody: React.FC<ModalBodyProps> = ({
             variant='contained'
             color='secondary'
             className={classes.actionButton}
+            onClick={() => {
+              setWidgetData(tabKey, {
+                widgetTitle: title,
+                widgetCategory: tabKey,
+                widgetType: widgetType,
+                widgetColor: widgetColor,
+                widgetData: data,
+              });
+              onClose();
+            }}
           >
             Save
           </Button>

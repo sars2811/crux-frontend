@@ -50,6 +50,7 @@ export interface WidgetTabData {
   data: ColumnData[];
   name: string; // Name of the Tab
   summary: SummaryData;
+  unit?: string;
 }
 
 export enum WidgetColor {
@@ -270,6 +271,8 @@ const Widget: React.FC<WidgetData> = ({
               axisLine={false}
               tickLine={false}
               tick={{ fill: widgetTextTheme[widgetColor].primary }}
+              unit={widgetData[tabIndex].unit}
+              width={40}
             />
             <Tooltip />
             <CartesianGrid strokeDasharray='3 3' vertical={false} />
@@ -294,7 +297,11 @@ const Widget: React.FC<WidgetData> = ({
             className={classes.chartRoot}
           >
             <XAxis dataKey='name' hide type={'category'} />
-            <YAxis tick={{ fill: widgetTextTheme[widgetColor].primary }} />
+            <YAxis
+              tick={{ fill: widgetTextTheme[widgetColor].primary }}
+              width={40}
+              unit={widgetData[tabIndex].unit}
+            />
             <Tooltip />
             <CartesianGrid
               horizontal={false}
@@ -344,7 +351,7 @@ const Widget: React.FC<WidgetData> = ({
                 fill: widgetTextTheme[widgetColor].secondary,
               }}
             >
-              {widgetData[tabIndex].summary.data[0].value}
+              {`${widgetData[tabIndex].summary.data[0].value}${widgetData[tabIndex].unit ? widgetData[tabIndex].unit : ''}`}
             </text>
             <text
               x={130}
@@ -390,7 +397,7 @@ const Widget: React.FC<WidgetData> = ({
                       {column.data.map((block, index) => {
                         return (
                           <TableCell key={index} className={classes.tableCell}>
-                            {block.value}
+                            {`${block.value}${widgetData[tabIndex].unit ? widgetData[tabIndex].unit : ''}`}
                           </TableCell>
                         );
                       })}
@@ -409,7 +416,7 @@ const Widget: React.FC<WidgetData> = ({
                         key={index}
                         className={classes.tableFooterCell}
                       >
-                        {block.value}
+                        {`${block.value}${widgetData[tabIndex].unit ? widgetData[tabIndex].unit : ''}`}
                       </TableCell>
                     );
                   })}

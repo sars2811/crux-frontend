@@ -2,20 +2,23 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Root from '../containers/Root';
 import WidgetDashboard from '../containers/WidgetDashboard';
+import BaseDisplay from '../containers/LetUsCook';
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     children: [
-      { path: '/', element: <div>Home</div> },
-      { path: '/about', element: <div>About</div> },
+      { path: '/', element: <BaseDisplay text='Home' /> },
       {
         path: '/widgets',
         element: <WidgetDashboard />,
       },
-      { path: '/1', element: <div>1</div> },
-      { path: '/2', element: <div>2</div> },
+      {
+        path: '/1',
+        element: <BaseDisplay text='1st Tab' />,
+      },
+      { path: '/2', element: <BaseDisplay text='Let Us Cook' /> },
     ],
   },
 ]);
